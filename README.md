@@ -21,7 +21,8 @@ YT2Podcast is a Flask-based service that generates RSS podcast feeds from YouTub
 ### Prerequisites
 
 - Python 3.10 or higher.
-- YouTube Data API v3 key ([Get one here](https://console.cloud.google.com/apis/credentials)).[web:3]
+- YouTube Data API v3 key ([Get one here](https://console.cloud.google.com/apis/credentials)).
+	- Used to fetch channel videos and info, free for casual use like this.
 
 ### Setup with Docker Compose (Recommended)
 
@@ -69,7 +70,7 @@ The easiest way to run YT2Podcast is using Docker Compose, which handles depende
        volumes:
          - .:/app
    ```
-   - Builds from a `Dockerfile` (create one if needed: `FROM python:3.10`, install requirements, expose 5000, CMD `flask --app yt2podcast.main run --host=0.0.0.0`).[web:6][web:12][web:15]
+   - Builds from a `Dockerfile` (create one if needed: `FROM python:3.10`, install requirements, expose 5000, CMD `flask --app yt2podcast.main run --host=0.0.0.0`).
 
 ### Manual Setup (Alternative)
 
@@ -130,4 +131,4 @@ Streams audio from a YouTube video.
 4. **Duration Extraction**: Fetches video durations and applies filters.
 5. **Feed Generation**: Creates iTunes-compatible RSS XML feed.
 6. **Storage**: Saves feed to local JSON for incremental updates.
-7. **Audio Streaming**: When a podcast player requests audio, yt-dlp extracts the direct audio URL and streams it.[web:3]
+7. **Audio Streaming**: When a podcast player requests audio, yt-dlp extracts the direct audio URL and streams it.
