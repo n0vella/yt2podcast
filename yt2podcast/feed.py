@@ -43,7 +43,7 @@ def generate_feed(channel_info: ChannelInfo, videos: list[Video], root_url: str)
         enclosure = ET.SubElement(item, "enclosure")
         enclosure.set(
             "url",
-            urljoin(settings.other.server_url, f"{root_url}audio/{video_id}"),
+            urljoin(settings.network.server_url, f"{root_url}audio/{video_id}"),
         )
         enclosure.set("type", "audio/mpeg")
         ET.SubElement(item, "itunes:image").set(

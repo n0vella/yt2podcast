@@ -10,6 +10,7 @@ from yt2podcast import logger
 from yt2podcast.api import Video, get_channel_id, get_channel_info, get_channel_videos
 from yt2podcast.audio import get_audio_link
 from yt2podcast.feed import generate_feed
+from yt2podcast.config import settings
 
 app = Flask(__name__)
 CORS(app)
@@ -131,3 +132,7 @@ def get_audio(video_id: str):
         mimetype=mimetype,
         direct_passthrough=True,
     )
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=settings.network.port, debug=False)
