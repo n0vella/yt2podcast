@@ -5,5 +5,5 @@ services:
     ports:
       - "18622:8000"
     volumes:
-      - ./storage:/code/feeds
+      - ./storage/feeds:/code/feeds
     restart: always

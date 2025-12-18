@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from yt2podcast.api import Video
 
 
-STORAGE_PATH = Path("./feeds")
+STORAGE_PATH = Path("./storage/feeds")
 
 STORAGE_PATH.mkdir(exist_ok=True)
 
