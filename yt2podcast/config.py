@@ -17,6 +17,7 @@ settings = Dynaconf(
         str(default_settings),
         str(user_settings),
     ],
+    merge_enabled = True
 )
 
 if not user_settings.exists() or not settings.youtube.api_key:
