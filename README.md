@@ -34,56 +34,47 @@ The easiest way to run YT2Podcast is using Docker Compose, which handles depende
    cd yt2podcast
    ```
 
-2. **Create `.secrets.toml`** in the project root:
+2. **Create `settings.toml`** in the project root (or just run it to get a copy of default_settings):
+
+   Default settings are on [default_settings.toml]("./yt2podcast/default_settings.toml).
+   At least you must configure YouTube API key on settings.toml
+   It's free for this tool requirements: https://developers.google.com/youtube/v3/getting-started
+
    ```
    [youtube]
    api_key = "YOUR_YOUTUBE_API_KEY_HERE"
-   
-   # Optional: Logging tweaks
-   [logging]
-   log_file = "app.log"
-   format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-   datefmt = "%Y-%m-%d %H:%M:%S"
-
-   [logging.levels]
-   root = "INFO"
-   werkzeug = "WARNING"
-   yt_api = "WARNING"
    ```
 
 3. **Start with Docker Compose**:
    ```
-   docker-compose up --build
+   docker-compose up -d
    ```
-   This builds and runs the Flask app on `http://localhost:5000`. Ensure Docker and Docker Compose are installed.
 
-   Example `docker-compose.yml` (add to project root if not present):
-   ```
-   version: '3.8'
-   services:
-     web:
-       build: .
-       ports:
-         - "5000:5000"
-       env_file:
-         - .secrets.toml
-       volumes:
-         - .:/app
-   ```
-   - Builds from a `Dockerfile` (create one if needed: `FROM python:3.10`, install requirements, expose 5000, CMD `flask --app yt2podcast.main run --host=0.0.0.0`).
+   This builds and runs the Flask app on `http://localhost:18622`. Ensure Docker and Docker Compose are installed.
 
-### Manual Setup (Alternative)
+### Manual Setup (Alternative), you must have python installed
+
+0. **(Recommended) create a virtual environment, you must have virtualenv installed**
+   ```
+   virtualenv venv
+
+   # on Windows
+   ./venv/Scripts/activate
+
+   # on Linux
+   source ./venv/bin/activate
+   ```
 
 1. **Install dependencies**:
    ```
    pip install -r requirements.txt
    ```
 
-2. **Configure** as above with `.secrets.toml`.
+2. **Configure** as above with `settings.toml`.
 
 3. **Start the server**:
    ```
-   flask --app yt2podcast.main run --host=0.0.0.0
+   python ./yt2podcast/main.py
    ```
 
 ## 📖 Usage
