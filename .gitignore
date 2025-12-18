@@ -1,8 +1,13 @@
+__pycache__
 .local
 .idea
 .env
 .vercel
 feeds
 *.log
-# Ignore dynaconf secret files
-.secrets.*
+
+# Ignore user settings
+settings.toml
+
+# Ignore default docker storage with feeds
+storage
