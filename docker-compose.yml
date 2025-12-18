@@ -1,8 +1,9 @@
 services:
-  youtube-podcast:
-    container_name: youtube-podcast
+  yt2podcast:
+    container_name: yt2podcast
     build: .
     ports:
       - "18622:8000"
     volumes:
       - ./storage:/code/feeds
+    restart: always
