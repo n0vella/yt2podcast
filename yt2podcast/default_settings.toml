@@ -18,3 +18,4 @@ yt_api = "WARNING"
 [network]
 server_url = "" # used to generate audio url, use if feed links doesn't work
 port = "18622" # port used when running it from main.py without docker
+debug = false # flask debug

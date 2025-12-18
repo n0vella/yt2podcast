@@ -135,4 +135,4 @@ def get_audio(video_id: str):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=settings.network.port, debug=False)
+    app.run(host="0.0.0.0", port=settings.network.port, debug=settings.network.debug)
