@@ -9,12 +9,15 @@ Convert any YouTube channel into a podcast feed you can subscribe to in your fav
 
 YT2Podcast is a Flask-based service that generates RSS podcast feeds from YouTube channels. It allows you to listen to your favorite YouTube content in any podcast player that supports custom RSS feeds, with automatic audio extraction and caching.
 
+**Please be polite and don't abuse this. If you think it's worth it, pay for a YouTube subscription or watch some ads to support the platform and its creators.**
+
 ## ✨ Features
 
 - **Channel to Podcast**: Convert any YouTube channel to an RSS podcast feed.
 - **Audio Extraction**: Automatically extracts audio from YouTube videos using yt-dlp and **streams it**.
 - **Smart Caching**: Caches audio URLs to minimize API calls and improve performance.
 - **Duration Filtering**: Filter channel videos by minimum/maximum duration.
+- **Password authentication**: Token and HTTP-Basic-Auth methods supported
 
 ## 🚀 Installation
 
@@ -87,6 +90,30 @@ Additional query parameters:
 
 Example: `http://localhost:5000/feed/@veritasium?min_duration=300` generates a filtered RSS feed.
 
+### 🔐Password prottection
+
+If you didn't want to anyone abusing of your podcast server you can prtect it using:
+
+   - Url token, added as "token GET parameter"
+   - Password, using HTTP Basic Auth (Some clients like Antennapod supports it)
+   
+   Just check settings.toml to activate this:
+
+   ```
+   [auth]
+   # Configure access control. Leave blank if unsure.
+   # Token and password methods are mutually exclusive; configure only one.
+
+   token = "" # Access via URL parameter: http(s)://<your_url>?token=<your_token>
+   password = "" # Used for HTTP Basic Auth (required by clients like AntennaPod)
+
+   # Set a hash_algorithm if you prefer not to store the password in plain text.
+   # Supports 'md5', 'sha256', or any algorithm available in hashlib.
+   # Reference: https://docs.python.org/3/library/hashlib.html
+   hash_algorithm = ""
+   ```
+
+
 ## 🔌 API Endpoints
 
 ### `GET /feed/<channel_name>`
@@ -108,18 +135,3 @@ Streams audio from a YouTube video.
 - `video_id` (path): YouTube video ID.
 
 **Response:** Audio stream (typically audio/mp4).
-
-**Features:**
-- Supports HTTP range requests (seeking).
-- Automatic URL caching with expiration.
-- Chunked transfer for full downloads.
-
-## ⚙️ How It Works
-
-1. **Feed Request**: Client requests `/feed/@channelname`.
-2. **Channel Lookup**: Server resolves channel handle to channel ID using YouTube API.
-3. **Video Fetching**: Retrieves all videos from the channel's uploads playlist.
-4. **Duration Extraction**: Fetches video durations and applies filters.
-5. **Feed Generation**: Creates iTunes-compatible RSS XML feed.
-6. **Storage**: Saves feed to local JSON for incremental updates.
-7. **Audio Streaming**: When a podcast player requests audio, yt-dlp extracts the direct audio URL and streams it.

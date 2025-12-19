@@ -11,6 +11,7 @@ from yt2podcast.api import Video, get_channel_id, get_channel_info, get_channel_
 from yt2podcast.audio import get_audio_link
 from yt2podcast.feed import generate_feed
 from yt2podcast.config import settings
+from yt2podcast.login import auth
 
 app = Flask(__name__)
 CORS(app)
@@ -18,6 +19,7 @@ cache = Cache(app, config={"CACHE_TYPE": "simple"})
 
 
 @app.route("/feed/<string:channel_name>")
+@auth
 def get_channel_feed(channel_name: str) -> Response:
     # get url args
     min_duration = request.args.get("min_duration", default=None, type=int)
@@ -46,6 +48,7 @@ CHUNK_SIZE = 1024 * 1024 * 10
 
 
 @app.route("/audio/<string:video_id>")
+@auth
 def get_audio(video_id: str):
     logger.info("Playing: %s", video_id)
     url = cache.get(video_id)

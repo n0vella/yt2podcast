@@ -19,3 +19,15 @@ yt_api = "WARNING"
 server_url = "" # used to generate audio url, use if feed links doesn't work
 port = "18622" # port used when running it from main.py without docker
 debug = false # flask debug
+
+[auth]
+# Configure access control. Leave blank if unsure.
+# Token and password methods are mutually exclusive; configure only one.
+
+token = "" # Access via URL parameter: http(s)://<your_url>?token=<your_token>
+password = "" # Used for HTTP Basic Auth (required by clients like AntennaPod)
+
+# Set a hash_algorithm if you prefer not to store the password in plain text.
+# Supports 'md5', 'sha256', or any algorithm available in hashlib.
+# Reference: https://docs.python.org/3/library/hashlib.html
+hash_algorithm = ""
